@@ -19,7 +19,7 @@ public class App {
         try {
             session.beginTransaction();
 
-            List<Person> people = session.createQuery("FROM Person ").getResultList();
+            List<Person> people = session.createQuery("FROM Person WHERE age>30").getResultList();
             for (Person person : people) {
                 System.out.println(person);
             }
