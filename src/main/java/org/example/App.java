@@ -1,11 +1,8 @@
 package org.example;
 
-import org.example.model.Person;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
-import java.util.List;
 
 /**
  * Hello world!
@@ -19,7 +16,6 @@ public class App {
         try {
             session.beginTransaction();
 
-            session.createQuery("DELETE Person WHERE age<30").executeUpdate();
 
             session.getTransaction().commit();
         } finally {
