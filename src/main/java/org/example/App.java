@@ -19,14 +19,13 @@ public class App {
         try {
             session.beginTransaction();
 
-            Person person = session.get(Person.class, 2);
-            session.remove(person);     //remove person from db
+            Person person = session.get(Person.class, 4);
+            Item item = session.get(Item.class, 1);
 
-            /*List<Item> items = person.getItems();
-            for (Item item : items) {
-                item.setOwner(null);
-            }*/
-            person.getItems().forEach(item -> item.setOwner(null));     //remove person for hibernate cash
+            item.getOwner().getItems().remove(item);        //delete item for old owner - hibernate cash
+
+            item.setOwner(person);      //new owner for DB
+            person.getItems().add(item);        //new item - hibernate cash
 
             session.getTransaction().commit();
         } finally {
