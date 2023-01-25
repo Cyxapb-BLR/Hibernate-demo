@@ -7,3 +7,5 @@ CREATE TABLE Person
 INSERT INTO Person(id, name, age) VALUES (1,'TestPerson',50);
 
 SELECT *FROM Person;
+
+DROP TABLE Person;
