@@ -6,8 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.util.List;
-
 /**
  * Hello world!
  */
@@ -21,13 +19,14 @@ public class App {
         try {
             session.beginTransaction();
 
-            Person person = session.get(Person.class, 3);
-            List<Item> items = person.getItems();
+            Person person = session.get(Person.class, 2);
+            session.remove(person);     //remove person from db
 
+            /*List<Item> items = person.getItems();
             for (Item item : items) {
-                session.remove(item);       // delete in DB
-            }
-            person.getItems().clear();      //delete in Hibernate cash
+                item.setOwner(null);
+            }*/
+            person.getItems().forEach(item -> item.setOwner(null));     //remove person for hibernate cash
 
             session.getTransaction().commit();
         } finally {
