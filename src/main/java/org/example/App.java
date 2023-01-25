@@ -18,8 +18,7 @@ public class App {
             session.beginTransaction();
 
             Person person = session.get(Person.class, 2);   //id=2
-            person.setName("Vadzim Matskevich");
-            person.setAge(34);
+            session.delete(person);
 
             session.getTransaction().commit();
         } finally {
