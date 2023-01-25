@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -21,13 +23,13 @@ public class App {
         try {
             session.beginTransaction();
 
-            Person person = session.get(Person.class, 2);   //id=2
+            Person person = new Person("Vadim", 34);
+            Item newItem = new Item("DellMonitor", person); // person for item
 
-            Item newItem = new Item("PixelPhone", person);  // person for item in DB
+            person.setItems(new ArrayList<Item>(Collections.singletonList(newItem)));   // item for person
 
-            person.getItems().add(newItem);     //item for person  in hibernate cash
-
-            session.save(newItem);  //save item in DB with person relationship
+            session.save(person);
+            session.save(newItem);
 
             session.getTransaction().commit();
         } finally {
