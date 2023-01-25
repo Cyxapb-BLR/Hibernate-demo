@@ -21,11 +21,13 @@ public class App {
         try {
             session.beginTransaction();
 
-            Item item = session.get(Item.class, 5);
-            System.out.println(item);
+            Person person = session.get(Person.class, 2);   //id=2
 
-            Person owner = item.getOwner();
-            System.out.println(owner);
+            Item newItem = new Item("PixelPhone", person);  // person for item in DB
+
+            person.getItems().add(newItem);     //item for person  in hibernate cash
+
+            session.save(newItem);  //save item in DB with person relationship
 
             session.getTransaction().commit();
         } finally {
