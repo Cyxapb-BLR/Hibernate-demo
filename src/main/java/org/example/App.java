@@ -19,7 +19,7 @@ public class App {
         try {
             session.beginTransaction();
 
-            session.createQuery("UPDATE Person  SET name='Test' WHERE age<30").executeUpdate();
+            session.createQuery("DELETE Person WHERE age<30").executeUpdate();
 
             session.getTransaction().commit();
         } finally {
