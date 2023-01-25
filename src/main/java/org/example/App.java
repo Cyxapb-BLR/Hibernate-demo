@@ -6,8 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,13 +21,13 @@ public class App {
         try {
             session.beginTransaction();
 
-            Person person = new Person("Vadim", 34);
-            Item newItem = new Item("DellMonitor", person); // person for item
+            Person person = session.get(Person.class, 3);
+            List<Item> items = person.getItems();
 
-            person.setItems(new ArrayList<Item>(Collections.singletonList(newItem)));   // item for person
-
-            session.save(person);
-            session.save(newItem);
+            for (Item item : items) {
+                session.remove(item);       // delete in DB
+            }
+            person.getItems().clear();      //delete in Hibernate cash
 
             session.getTransaction().commit();
         } finally {
