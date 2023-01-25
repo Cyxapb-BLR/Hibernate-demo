@@ -5,6 +5,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.List;
+
 /**
  * Hello world!
  */
@@ -17,12 +19,12 @@ public class App {
         try {
             session.beginTransaction();
 
-            Person person = new Person("Katerina", 26);
-            session.save(person);
+            List<Person> people = session.createQuery("FROM Person ").getResultList();
+            for (Person person : people) {
+                System.out.println(person);
+            }
 
             session.getTransaction().commit();
-
-            System.out.println(person.getId());
         } finally {
             sessionFactory.close();
         }
