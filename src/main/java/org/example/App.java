@@ -20,7 +20,7 @@ public class App {
             session.beginTransaction();
 
             Person person = new Person("Test person", 30);
-            Passport passport = new Passport(person, 123456780);
+            Passport passport = new Passport(123456780);
 
             person.setPassport(passport);       // for hibernate cash
 
