@@ -22,13 +22,10 @@ public class App {
         try {
             session.beginTransaction();
 
-            Director director = session.get(Director.class, 2);     //id=2
-            System.out.println(director);
+            Movie movie = session.get(Movie.class, 5);     //id=5
+            System.out.println(movie.getName());
 
-            List<Movie> movies = director.getMovies();
-            for (Movie movie : movies) {
-                System.out.println(movie.getName());
-            }
+            System.out.println(movie.getDirector().getName());
 
             session.getTransaction().commit();
         } finally {
