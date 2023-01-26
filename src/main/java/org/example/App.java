@@ -6,8 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.util.List;
-
 /**
  * Hello world!
  */
@@ -22,10 +20,12 @@ public class App {
         try {
             session.beginTransaction();
 
-            Movie movie = session.get(Movie.class, 5);     //id=5
-            System.out.println(movie.getName());
+            Director director = session.get(Director.class, 2); //id=2
+            Movie movie = new Movie("New Movie", 2000, director);
 
-            System.out.println(movie.getDirector().getName());
+            director.getMovies().add(movie);    //for hibernate cash
+
+            session.save(movie);
 
             session.getTransaction().commit();
         } finally {
