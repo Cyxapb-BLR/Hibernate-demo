@@ -23,13 +23,14 @@ public class App {
         try {
             session.beginTransaction();
 
-            Director director = new Director("New Director", 50);
-            Movie movie = new Movie("New Movie2", 1998, director);
+            Movie movie = session.get(Movie.class, 14);     //id=14
+            Director director = session.get(Director.class, 7);
 
-            director.setMovies(new ArrayList<Movie>(Collections.singletonList(movie)));     //for hibernate cash
+            movie.getDirector().getMovies().remove(movie);  //remove for old director for hibernate cash
 
-            session.save(director);
-            session.save(movie);
+            movie.setDirector(director);    //new director in db
+
+            director.getMovies().add(movie);    // new movie for director for hibernate cash
 
             session.getTransaction().commit();
         } finally {
