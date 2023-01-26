@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.List;
+
 /**
  * Hello world!
  */
@@ -21,7 +23,12 @@ public class App {
             session.beginTransaction();
 
             Director director = session.get(Director.class, 2);     //id=2
-            System.out.println(director.getMovies());
+            System.out.println(director);
+
+            List<Movie> movies = director.getMovies();
+            for (Movie movie : movies) {
+                System.out.println(movie.getName());
+            }
 
             session.getTransaction().commit();
         } finally {
