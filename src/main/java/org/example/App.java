@@ -26,11 +26,9 @@ public class App {
             Movie movie = session.get(Movie.class, 14);     //id=14
             Director director = session.get(Director.class, 7);
 
-            movie.getDirector().getMovies().remove(movie);  //remove for old director for hibernate cash
+            director.getMovies().remove(movie); // remove movie from  director for hibernate cash
 
-            movie.setDirector(director);    //new director in db
-
-            director.getMovies().add(movie);    // new movie for director for hibernate cash
+            session.remove(movie);
 
             session.getTransaction().commit();
         } finally {
