@@ -14,13 +14,17 @@ public class Movie {
 
     @Column(name = "year_of_prodaction")
     private String year;
+    @ManyToOne()
+    @JoinColumn(name = "director_id", referencedColumnName = "director_id")
+    private Director director;
 
     public Movie() {
     }
 
-    public Movie(String name, String year) {
+    public Movie(String name, String year, Director director) {
         this.name = name;
         this.year = year;
+        this.director = director;
     }
 
     public int getId() {
