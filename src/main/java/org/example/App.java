@@ -19,12 +19,8 @@ public class App {
         try {
             session.beginTransaction();
 
-            Person person = new Person("Test person", 30);
-            Passport passport = new Passport(123456780);
-
-            person.setPassport(passport);       // for hibernate cash
-
-            session.save(person);
+            Person person = session.get(Person.class, 1);   //id=1
+            System.out.println(person.getPassport().getPassportNumber());
 
             session.getTransaction().commit();
         } finally {
