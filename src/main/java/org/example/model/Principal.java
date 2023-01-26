@@ -1,5 +1,7 @@
 package org.example.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +17,7 @@ public class Principal {
     @Column(name = "age")
     private int age;
     @OneToOne(mappedBy = "principal")
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private School school;
 
     public Principal() {

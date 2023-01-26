@@ -20,8 +20,8 @@ public class App {
         try {
             session.beginTransaction();
 
-            Principal principal = session.get(Principal.class, 2); //id=2
-            System.out.println(principal.getSchool());
+            School school = session.get(School.class, 2);   //id=2
+            System.out.println(school.getPrincipal().getName());
 
             session.getTransaction().commit();
         } finally {
