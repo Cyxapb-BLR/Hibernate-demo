@@ -27,8 +27,8 @@ public class App {
             Item item = new Item("Test cascading item", person);    // item with person in hibernate cash
             person.setItems(new ArrayList<Item>(Collections.singletonList(item)));  // person with item in hibernate cash
 
-            session.persist(person);        //save person and item in DB with cascading
-            //session.persist(item);      //hibernate does it automatically with  session.persist(person)
+            session.save(person);        //save person and item in DB with cascading
+            //session.save(item);        //hibernate does it automatically with  session.save(person)
 
             session.getTransaction().commit();
         } finally {
