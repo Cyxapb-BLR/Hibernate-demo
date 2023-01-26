@@ -12,7 +12,7 @@ public class Movie {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "year_of_prodaction")
+    @Column(name = "year_of_production")
     private String year;
     @ManyToOne()
     @JoinColumn(name = "director_id", referencedColumnName = "director_id")
