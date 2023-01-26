@@ -3,6 +3,7 @@ package org.example.model;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -58,6 +59,14 @@ public class Person {
 
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    public void addItem(Item item) {
+        if (this.items == null) {
+            this.items = new ArrayList<Item>();
+        }
+        items.add(item);
+        item.setOwner(this);        // for hibernate cash
     }
 
     @Override
