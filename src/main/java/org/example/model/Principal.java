@@ -58,6 +58,7 @@ public class Principal {
 
     public void setSchool(School school) {
         this.school = school;
+        school.setPrincipal(this);      //for hibernate cash
     }
 
     @Override
