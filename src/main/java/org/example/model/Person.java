@@ -1,5 +1,7 @@
 package org.example.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +15,9 @@ public class Person {
     private String name;
     @Column(name = "age")
     private int age;
+    @OneToOne(mappedBy = "person")
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    private Passport passport;
 
     public Person() {
     }
@@ -44,6 +49,14 @@ public class Person {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public Passport getPassport() {
+        return passport;
+    }
+
+    public void setPassport(Passport passport) {
+        this.passport = passport;
     }
 
     @Override
