@@ -20,12 +20,10 @@ public class App {
         try {
             session.beginTransaction();
 
-            School school = session.get(School.class, 5);
+            Principal principal = session.get(Principal.class, 8);
+            School school = new School(212);
 
-            Principal principal = new Principal("Monica", 47);
-            session.save(principal);
-
-            school.setPrincipal(principal);
+            principal.setSchool(school);
 
             session.getTransaction().commit();
         } finally {
