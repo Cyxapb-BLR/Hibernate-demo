@@ -14,7 +14,7 @@ public class Person {
     private String name;
     @Column(name = "age")
     private int age;
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)   //added cascading
     private List<Item> items;
 
     public Person() {

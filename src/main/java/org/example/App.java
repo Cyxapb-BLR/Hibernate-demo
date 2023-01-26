@@ -6,6 +6,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  * Hello world!
  */
@@ -19,13 +22,13 @@ public class App {
         try {
             session.beginTransaction();
 
-            Person person = session.get(Person.class, 4);
-            Item item = session.get(Item.class, 1);
+            Person person = new Person("Test cascading", 30);
 
-            item.getOwner().getItems().remove(item);        //delete item for old owner - hibernate cash
+            Item item = new Item("Test cascading item", person);    // item with person in hibernate cash
+            person.setItems(new ArrayList<Item>(Collections.singletonList(item)));  // person with item in hibernate cash
 
-            item.setOwner(person);      //new owner for DB
-            person.getItems().add(item);        //new item - hibernate cash
+            session.persist(person);        //save person and item in DB with cascading
+            //session.persist(item);      //hibernate does it automatically with  session.persist(person)
 
             session.getTransaction().commit();
         } finally {
