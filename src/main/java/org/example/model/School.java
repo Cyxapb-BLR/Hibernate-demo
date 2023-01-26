@@ -10,8 +10,11 @@ public class School {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "schol_number")
+    @Column(name = "school_number")
     private int schoolNumber;
+    @OneToOne
+    @JoinColumn(name = "principal_id", referencedColumnName = "id")
+    private Principal principal;
 
     public School() {
     }
@@ -34,6 +37,14 @@ public class School {
 
     public void setSchoolNumber(int schoolNumber) {
         this.schoolNumber = schoolNumber;
+    }
+
+    public Principal getPrincipal() {
+        return principal;
+    }
+
+    public void setPrincipal(Principal principal) {
+        this.principal = principal;
     }
 
     @Override

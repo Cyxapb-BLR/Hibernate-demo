@@ -14,6 +14,8 @@ public class Principal {
     private String name;
     @Column(name = "age")
     private int age;
+    @OneToOne(mappedBy = "principal")
+    private School school;
 
     public Principal() {
     }
@@ -45,6 +47,14 @@ public class Principal {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
     }
 
     @Override
