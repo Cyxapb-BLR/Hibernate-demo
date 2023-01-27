@@ -24,14 +24,13 @@ public class App {
             Session session = sessionFactory.getCurrentSession();
             session.beginTransaction();
 
-            Movie movie = new Movie("Reservoir dogs", 1992);
-
             Actor actor = session.get(Actor.class, 1);
+            System.out.println(actor.getMovies());
 
-            movie.setActors(new ArrayList<>(Collections.singletonList(actor)));
-            actor.getMovies().add(movie);   //for hibernate cash
+            Movie movieToRemove = actor.getMovies().get(0);
 
-            session.save(movie);
+            actor.getMovies().remove(movieToRemove);
+            movieToRemove.getActors().remove(actor);
 
             session.getTransaction().commit();
         }
