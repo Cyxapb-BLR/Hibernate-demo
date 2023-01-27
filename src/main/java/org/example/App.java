@@ -23,15 +23,29 @@ public class App {
 
             Person person = session.get(Person.class, 1);
             System.out.println("got person from table");
-            System.out.println(person);
-
-            Hibernate.initialize(person.getItems());    // for unloading related LAZY entities
 
             session.getTransaction().commit();
             // after commit auto session.close();
 
-            System.out.println("out of session");
-            System.out.println(person.getItems());// can get items from hibernate cash without session
+            System.out.println("session ended (session.close())");
+
+            //open session and transaction
+            session = sessionFactory.getCurrentSession();
+            session.beginTransaction();
+
+            System.out.println("inside 2nd transaction");
+
+            person = (Person) session.merge(person);
+
+            Hibernate.initialize(person.getItems());
+
+            session.getTransaction().commit();
+
+            System.out.println("outside of 2nd");
+
+            //it works, because related items was unloaded
+            System.out.println(person.getItems());
+
         }
     }
 }
