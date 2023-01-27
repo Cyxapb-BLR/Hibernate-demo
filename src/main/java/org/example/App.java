@@ -20,13 +20,16 @@ public class App {
             Session session = sessionFactory.getCurrentSession();
             session.beginTransaction();
 
-            Item item = session.get(Item.class, 1);
-            System.out.println("got item");
+            Person person = session.get(Person.class, 1);
+            System.out.println("got person from table");
 
-            System.out.println(item.getOwner());
+            System.out.println(person.getItems());
 
             session.getTransaction().commit();
             // after commit auto session.close();
+
+            System.out.println(); // can get items from hibernate cash without session
+            System.out.println(person.getItems());
         }
     }
 }
