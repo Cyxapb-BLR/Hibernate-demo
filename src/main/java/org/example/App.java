@@ -22,14 +22,13 @@ public class App {
 
             Person person = session.get(Person.class, 1);
             System.out.println("got person from table");
-
-            System.out.println(person.getItems());
+            System.out.println(person);
 
             session.getTransaction().commit();
             // after commit auto session.close();
 
-            System.out.println(); // can get items from hibernate cash without session
-            System.out.println(person.getItems());
+            System.out.println("out of session");
+            System.out.println(person.getItems());// can't get items from hibernate cash without session, error
         }
     }
 }
