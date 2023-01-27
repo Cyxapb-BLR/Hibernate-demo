@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.model.Item;
 import org.example.model.Person;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -24,7 +25,7 @@ public class App {
             System.out.println("got person from table");
             System.out.println(person);
 
-            System.out.println(person.getItems());
+            Hibernate.initialize(person.getItems());    // for unloading related LAZY entities
 
             session.getTransaction().commit();
             // after commit auto session.close();
