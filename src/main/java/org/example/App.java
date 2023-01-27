@@ -20,11 +20,10 @@ public class App {
             Session session = sessionFactory.getCurrentSession();
             session.beginTransaction();
 
-            Person person = session.get(Person.class, 1);
-            System.out.println("got Person");
+            Item item = session.get(Item.class, 1);
+            System.out.println("got item");
 
-            // will get related entities (Lazy)
-            System.out.println(person.getItems());
+            System.out.println(item.getOwner());
 
             session.getTransaction().commit();
             // after commit auto session.close();

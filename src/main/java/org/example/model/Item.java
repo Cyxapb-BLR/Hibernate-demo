@@ -11,7 +11,7 @@ public class Item {
     private int id;
     @Column(name = "item_name")
     private String itemName;
-    @ManyToOne()
+    @ManyToOne       // default fetch = FetchType.EAGER
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person owner;
 
