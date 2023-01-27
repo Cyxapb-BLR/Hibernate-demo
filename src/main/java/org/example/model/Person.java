@@ -1,6 +1,7 @@
 package org.example.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Person")
@@ -13,6 +14,8 @@ public class Person {
     private String name;
     @Column(name = "age")
     private int age;
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+    private List<Item> items;
 
     public Person() {
     }

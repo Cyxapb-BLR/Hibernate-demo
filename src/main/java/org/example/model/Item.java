@@ -11,6 +11,9 @@ public class Item {
     private int id;
     @Column(name = "item_name")
     private String itemName;
+    @ManyToOne()
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    private Person owner;
 
     public Item() {
     }
