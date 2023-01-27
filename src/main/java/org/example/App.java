@@ -24,11 +24,13 @@ public class App {
             System.out.println("got person from table");
             System.out.println(person);
 
+            System.out.println(person.getItems());
+
             session.getTransaction().commit();
             // after commit auto session.close();
 
             System.out.println("out of session");
-            System.out.println(person.getItems());// can't get items from hibernate cash without session, error
+            System.out.println(person.getItems());// can get items from hibernate cash without session
         }
     }
 }
