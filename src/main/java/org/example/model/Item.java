@@ -38,6 +38,14 @@ public class Item {
         this.itemName = itemName;
     }
 
+    public Person getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Person owner) {
+        this.owner = owner;
+    }
+
     @Override
     public String toString() {
         return "Item{" +
