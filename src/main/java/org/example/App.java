@@ -24,9 +24,14 @@ public class App {
             Session session = sessionFactory.getCurrentSession();
             session.beginTransaction();
 
-            Actor actor = session.get(Actor.class, 2); //id = 2
+            Movie movie = new Movie("Reservoir dogs", 1992);
 
-            System.out.println(actor.getMovies());
+            Actor actor = session.get(Actor.class, 1);
+
+            movie.setActors(new ArrayList<>(Collections.singletonList(actor)));
+            actor.getMovies().add(movie);   //for hibernate cash
+
+            session.save(movie);
 
             session.getTransaction().commit();
         }
