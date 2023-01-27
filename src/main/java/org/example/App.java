@@ -24,9 +24,9 @@ public class App {
             Session session = sessionFactory.getCurrentSession();
             session.beginTransaction();
 
-            Movie movie = session.get(Movie.class, 1); //id=1
+            Actor actor = session.get(Actor.class, 2); //id = 2
 
-            System.out.println(movie.getActors());
+            System.out.println(actor.getMovies());
 
             session.getTransaction().commit();
         }
