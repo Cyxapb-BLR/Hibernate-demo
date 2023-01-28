@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.List;
+
 /**
  * Hello world!
  */
@@ -35,17 +37,14 @@ public class App {
 
             System.out.println("inside 2nd transaction");
 
-            person = (Person) session.merge(person);
+            List<Item> items = session.createQuery("select i from Item i where i.owner.id=:personId", Item.class)
+                    .setParameter("personId", person.getId()).getResultList();
 
-            Hibernate.initialize(person.getItems());
+            System.out.println(items);
 
             session.getTransaction().commit();
 
             System.out.println("outside of 2nd");
-
-            //it works, because related items was unloaded
-            System.out.println(person.getItems());
-
         }
     }
 }
